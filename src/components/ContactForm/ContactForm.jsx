@@ -19,7 +19,7 @@ export class ContactForm extends Component {
         // console.log(this.state)
     
         const id = nanoid();
-        this.setState({id: nanoid()})
+        this.setState({id: id})
         // console.log(id)
         this.props.onSubmit(this.state);
         this.reset();
