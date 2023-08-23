@@ -4,8 +4,7 @@ import { nanoid } from 'nanoid'
 export class ContactForm extends Component {
     state = {
         name: '',
-        number: '', 
-        id: ''           
+        number: ''        
     }
     handleImputChange = e => {
         const {name, value} = e.target;
@@ -19,9 +18,9 @@ export class ContactForm extends Component {
         // console.log(this.state)
     
         const id = nanoid();
-        this.setState({id: id})
+        // this.setState({id: id})
         // console.log(id)
-        this.props.onSubmit(this.state);
+        this.props.onSubmit({...this.state, id});
         this.reset();
 
       }
