@@ -15,7 +15,7 @@ export class App extends Component {
   }
   
   formSubmitHendle = data => {
-    this.state.contacts.push(data)
+    this.setState(prev => ({contacts: [...prev.contacts, data]}))
     console.log(this.state.contacts)
 
     console.log(data)
