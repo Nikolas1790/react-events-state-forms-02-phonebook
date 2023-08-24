@@ -22,11 +22,7 @@ export class App extends Component {
       return alert(`${data.name} is already in contacts`)
     }
     this.setState(prev => ({contacts: [...prev.contacts, data]}))
-    // console.log(this.state.contacts)
-    // console.log(this.state.contacts.filter(contact => contact.name.toLowerCase().includes(data.name.toLowerCase()) ))
-    // console.log(this.state.contacts.filter(contact => contact.name === data.name ))
-    // console.log(data.name)
-  }
+      }
 
   deleteItem = (itemId) => {
     this.setState(prevState =>({
@@ -36,9 +32,8 @@ export class App extends Component {
 
   handleImputFilter = e => {
     const {name, value} = e.target;
-    console.log(value)
-    this.setState({[name]: value})
-        
+    
+    this.setState({[name]: value})        
   }
 
   getVisibleItems = () => {

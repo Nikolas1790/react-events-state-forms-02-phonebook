@@ -1,5 +1,6 @@
 import { FindContact } from "components/App.styled"
 
+
 export const Filter =({handleImputFilter, filter}) => {
     return(
         <div>
@@ -13,3 +14,4 @@ export const Filter =({handleImputFilter, filter}) => {
         </div>
     )
 }
+
