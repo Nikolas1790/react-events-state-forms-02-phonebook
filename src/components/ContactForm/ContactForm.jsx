@@ -14,15 +14,9 @@ export class ContactForm extends Component {
 
       handleAddContact = e => {
         e.preventDefault();
-        // console.log(e)
-        // console.log(this.state)
-    
         const id = nanoid();
-        // this.setState({id: id})
-        // console.log(id)
         this.props.onSubmit({...this.state, id});
         this.reset();
-
       }
 
       reset = () => {

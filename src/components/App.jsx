@@ -1,7 +1,7 @@
 import { Component } from "react"
-// import { nanoid } from 'nanoid'
 import { ContactForm } from "./ContactForm/ContactForm"
 import { ContactList } from "./ContactList/ContactList"
+import { Filter } from "./Filter/Filter"
 
 export class App extends Component {
   state = {
@@ -15,79 +15,51 @@ export class App extends Component {
   }
   
   formSubmitHendle = data => {
+    const returnContact = this.state.contacts.find(contact => contact.name.toLowerCase().includes(data.name.toLowerCase()) );
+
+    if(returnContact){
+      return alert(`${data.name} is already in contacts`)
+    }
     this.setState(prev => ({contacts: [...prev.contacts, data]}))
-    console.log(this.state.contacts)
-
-    console.log(data)
+    // console.log(this.state.contacts)
+    // console.log(this.state.contacts.filter(contact => contact.name.toLowerCase().includes(data.name.toLowerCase()) ))
+    // console.log(this.state.contacts.filter(contact => contact.name === data.name ))
+    // console.log(data.name)
   }
-  // handleImputChange = e => {
-  //   const {name, value} = e.target;
-    
-  //   this.setState({[name]: value})
-  // }
 
-  // handleAddContact = e => {
-  //   e.preventDefault();
-  //   console.log(e)
-  //   console.log(this.state)
+  deleteItem = (itemId) => {
+    this.setState(prevState =>({
+      contacts: prevState.contacts.filter(contact => contact.id !== itemId),
+    }))
+  }
 
-  //   const id = nanoid();
-  //   console.log(id)
-  // }
+  handleImputFilter = e => {
+    const {name, value} = e.target;
+    console.log(value)
+    this.setState({[name]: value})
+        
+  }
+
+  getVisibleItems = () => {
+    const {contacts, filter} = this.state;
+    return  contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())      
+      )
+  } 
 
   render() {
+    const getVisibleItems =this.getVisibleItems()
+    const {filter} = this.state
+
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHendle}/>
-        
-        {/* <form onSubmit={this.handleAddContact}>        
-        <label htmlFor="">
-        Name<br />
-        <input
-           type="text"
-           name="name"
-           value={this.state.name}
-           onChange={this.handleImputChange}
-           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-           required
-          />
-          </label>
-         <br />         
-         
-         <label htmlFor="">Number<br />
-         <input
-              type="tel"
-              name="number"
-              value={this.state.number}
-              onChange={this.handleImputChange}
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-            </label>
-            <br />
-
-         <button type="submit" >Add contact</button>
-        </form> */}
-
+        <ContactForm onSubmit={this.formSubmitHendle}/> 
         <h2>Contacts</h2>
-
-        <label htmlFor=""> Find contacts by name <br />
-          <input type="text" pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"/>
-        </label>
-
-        <ContactList options={this.state.contacts}/>
-        {/* <ul>          
-          {this.state.contacts.map((contact) =>
-            <li key={contact.id}>{contact.name}: {contact.number}
-            <button>Delete</button>
-            </li>
-          )}
-        </ul> */}
-
+        <Filter handleImputFilter={this.handleImputFilter} value={filter}/>  
+        <ContactList options={getVisibleItems} onDeleteContact={this.deleteItem}/>
       </div>
     )
   };
 };
+
+

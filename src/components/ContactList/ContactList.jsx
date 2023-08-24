@@ -1,10 +1,10 @@
-export const ContactList =({options}) => {
+export const ContactList =({options, onDeleteContact}) => {
     return(
     <div>
         <ul>          
-          {options.map((contact) =>(
-            <li key={contact.id}>{contact.name}: {contact.number}
-            <button>Delete</button>
+          {options.map(({id, name, number}) =>(
+            <li key={id}>{name}: {number}
+            <button onClick={() => onDeleteContact(id)}>Delete</button>
             </li>
          ) )}
         </ul>
