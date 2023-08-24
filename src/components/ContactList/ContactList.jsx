@@ -1,12 +1,14 @@
+import { ButtonDel, ItemContact, ItemsContracts } from "components/App.styled"
+
 export const ContactList =({options, onDeleteContact}) => {
     return(
     <div>
-        <ul>          
+        <ItemsContracts>          
           {options.map(({id, name, number}) =>(
-            <li key={id}>{name}: {number}
-            <button onClick={() => onDeleteContact(id)}>Delete</button>
-            </li>
+            <ItemContact key={id}>{name}: {number}
+            <ButtonDel onClick={() => onDeleteContact(id)}>Delete</ButtonDel>
+            </ItemContact>
          ) )}
-        </ul>
+        </ItemsContracts>
     </div>
 )}

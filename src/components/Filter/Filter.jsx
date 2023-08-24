@@ -1,7 +1,9 @@
+import { FindContact } from "components/App.styled"
+
 export const Filter =({handleImputFilter, filter}) => {
     return(
         <div>
-             <h2>Find contacts by name</h2>
+             <FindContact>Find contacts by name</FindContact>
              <input type="text"
                   name="filter"
                   onChange={handleImputFilter}
