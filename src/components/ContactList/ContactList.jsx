@@ -6,7 +6,8 @@ export const ContactList =({options, onDeleteContact}) => {
         <ItemsContracts>          
           {options.map(({id, name, number}) =>(
             <ItemContact key={id}>{name}: {number}
-            <ButtonDel onClick={() => onDeleteContact(id)}>Delete</ButtonDel>
+            <ButtonDel onClick={() => onDeleteContact(id)}>
+              Delete</ButtonDel>
             </ItemContact>
          ) )}
         </ItemsContracts>
